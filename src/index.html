@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html data-ng-app="ngBoilerplate" data-ng-controller="AppCtrl">
+  <head>
+    <title data-ng-bind="pageTitle"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- font awesome from BootstrapCDN -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+      <link type="text/css" href="assets/skin/jplayer.blue.monday.css" rel="stylesheet" />
+      <script type="text/javascript" src="assets/jquery.jplayer.min.js"></script>
+      <script type="text/javascript">
+          //<![CDATA[
+          var radio_url='http://listen.rpfm.ru:9000/premium128';
+          $(document).ready(function(){
+              $("#jquery_jplayer_1").jPlayer({
+                  ready: function (event) {
+                      $(this).jPlayer("setMedia", {
+                          m4a: radio_url,
+                          mp3: radio_url
+                      });
+                  },
+                  swfPath: "http://jplayer.org/latest/js",
+                  supplied:"mp3,m4v",
+                  oggSupport: false,
+                  preload:"auto"
+              });
+          });
+          //]]>
+      </script>
+
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <div class="navbar transparent navbar-inverse">
+          <div class="navbar-inner header_dotted">
+            <div class="container">
+              <ul class="nav">
+                <li  style="border-left: none" data-ui-route="/home"> <!--transport this to css asap-->
+                    <a href="#/home">
+                        <img src="assets/plus_logo_small.png"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#test">
+                        <img src="assets/Buttons/On_Button.png"/>
+                    </a>
+                </li>
+                <li>
+                  <a href="#/">
+                      Now playing: {{currentRadio}}
+                  </a>
+                </li>
+                <li>
+                  <a id="ma" href="#/">
+                      Main
+                  </a>
+                </li>
+                  <li>
+                   <a href="#/channels">
+                      Radio Channels
+                   </a>
+                  </li>
+                <li>
+                  <a class="ma2" href="#/">
+                      Contacts
+                  </a>
+                </li>
+                <li style="border-right: none"> <!--transport this to css asap-->
+                   <a href="#/">
+                      <img src="assets/Buttons/facebook.png"/>
+                   </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+          <div class="container-fluid header_bar">
+              <div class="header_image">
+                  <img src="assets/header_bar.png" alt="header"/>
+                  <div>
+                      <h2>Best radiostation of Europe and Russia</h2>
+                      <h4>Vote for your favorite station</h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="mid_mass container">
+
+     <div class="container-fluid" id="play_find" data-ui-view="main"></div>
+
+        <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+        <div id="jp_container_1" class="jp-audio">
+            <div class="jp-type-single">
+                <div class="jp-gui jp-interface">
+                    <ul class="jp-controls">
+                        <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                        <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                    </ul>
+                </div>
+                <div class="jp-title">
+                    <ul>
+                        <li>Bubble</li>
+                    </ul>
+                </div>
+                <div class="jp-no-solution">
+                    <span>Update Required</span>
+                    To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                </div>
+            </div>
+        </div>
+
+    <footer class="footer my_footer">
+        <div class="ul_margin">
+            <ul class="hr">
+                <li>
+                    <img src="assets/arrow_button.png"/>
+                        <a href="#/">MAIN</a>
+                </li>
+                <li>
+                    <img src="assets/arrow_button.png"/>
+                    <a href="#/channels">CHANNELS</a>
+                </li>
+                <li>
+                    <img src="assets/arrow_button.png"/>
+                    <a href="#/">CONTACTS</a>
+                </li>
+            </ul>
+        </div>
+
+
+    </footer>
+    </div>
+    <script type="text/javascript">
+        $('#play_find').on('click', '.play_this', function () {
+            radio_url=$(this).attr('stream');
+            $("#jquery_jplayer_1").jPlayer( "clearMedia" );
+            $("#jquery_jplayer_1").jPlayer("setMedia",
+                    {
+                        m4a: radio_url,
+                        mp3: radio_url
+                    }
+            );
+            $("#jquery_jplayer_1").jPlayer("load");
+            $("#jquery_jplayer_1").jPlayer("play");
+        });
+
+    </script>
+  </body>
+</html>
