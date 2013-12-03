@@ -1,10 +1,8 @@
 plusfm
 ======
-
 radio site, builed with angular,bootstrap on ng-boilerplate
 
-
-Install: 
+#Install: 
 1. Install Node.js
 2. git clone git@bitbucket.org:Vitaliy_s/radio.git
 3. cd radio
